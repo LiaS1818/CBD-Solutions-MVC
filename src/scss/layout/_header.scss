@@ -1,0 +1,125 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.derecha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include m.tablet{
+        align-items: flex-end; //flex end lo pone a la izquierda
+    }
+    
+    .dark-mode-boton {
+        width: 3rem;
+        margin-top:  3rem;
+        margin-bottom: 3rem;
+        // filter: invert(100%); invierte el color del svg
+
+        &:hover {
+            cursor: pointer;
+            opacity: 30%;
+        }
+        @include m.tablet{
+            margin-top: 0;
+        }
+    }
+}
+
+
+.barra {
+    display: flex;
+    flex-direction: column;
+    padding-top: 3rem;
+    align-items: center;
+
+    @include m.tablet {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+}
+
+.header {
+    background: v.$negro;
+    @include m.telefono{
+        
+    }
+
+    h1{
+        text-align: center;
+        color: v.$blanco;
+        @include m.tablet{
+            margin: 0;
+        }
+        
+    }
+
+    .contenido-header {
+        padding: 2rem;
+        @include m.tablet{
+          
+            justify-content: space-between;
+        }
+        align-items: center;
+    }
+
+   
+}
+
+.navegacion-principal {
+    visibility: hidden; //Es lo mismo que display none
+    opacity: 0;
+    height: 0;
+    transition: visibility .3s ease-in-out, opacity 0.5s linear; 
+    // display: none; // hace el bloque como si fuera un solo parrafo a lo largo de toda la pantalla
+    @include m.tablet{
+        display: flex; //alienar horizontalmente
+        gap: 2rem; //separacion
+        align-items: center;
+        opacity: 1;
+        visibility: visible;
+    }
+    a{
+        color: v.$blanco;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        display: block;
+        text-align: center;
+
+        &:hover {
+            color: v.$verdeClaro;
+        }
+        
+        
+    }   
+}
+
+.logo {
+    align-content: center;
+    padding: 1rem 15rem;
+    @include m.tablet{
+        display: none;
+    }
+}
+
+
+/** Menu de hamburguesa **/
+
+.mobile-menu {
+    @include m.tablet {
+        display: none;
+    }
+
+    img {
+        width: 5rem;
+    }
+}
+
+.mostrar {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+    @include m.tablet{
+        flex-direction: row;
+    }
+}

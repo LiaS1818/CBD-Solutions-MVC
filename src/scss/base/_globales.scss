@@ -1,0 +1,121 @@
+@use 'variables' as v; 
+@use 'base/mixins' as m;
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 100%;
+}
+
+*,
+*:before,  // el padding no representa un problema gracias al snippet
+*,:after {
+    // box-sizing: inherit;
+}
+
+body {
+    font-family: v.$fuente_principal;
+    font-size: 1.6rem; //tamanio base para las fuentes
+    height: inherit;
+    min-height: 100%;
+    width: 100%;
+}
+
+p {
+    font: 2rem;
+    color: v.$negro;
+    line-height: 1.5; //interlineado
+}
+
+.contenedor {
+    width: 95%;
+    max-width: 150rem;
+    margin: 0 auto;
+}
+
+.seccion {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+h1, h2, h3 {
+    margin : 0 0 5rem 0; //derecha, izquierda, arriba y abajoS
+}
+
+h1{
+    font-size: 5rem;
+}
+
+h2 {
+    text-align: center;
+    font-size: 4.6rem;
+}
+
+h3 {
+    font-size: 3rem;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    justify-content: right;
+    flex-direction: column;
+ }
+
+ li {
+    float: left ;
+    flex-direction: column;
+ }
+
+ nav {
+    margin: 0;
+ }
+
+ /* Botones */
+
+.boton-amarillo-block{
+    @include m.boton(v.$amarillo, block);
+}
+
+.boton-rojo-block {
+    @include m.boton(v.$rojo, block)
+}
+
+.boton-verde-block {
+    @include m.boton(v.$verde, block)
+}
+.boton-admin {
+    @include m.boton(v.$negro, inline-block)
+}
+
+.formulario__submit{
+    @include m.boton_submit(v.$amarillo, grid);
+}
+
+.boton-check{
+    @include m.boton_submit(v.$azul, grid)
+}
+.w-sm-100 {
+    width: 70%;
+
+}
+
+.contenedor_boton {
+    margin-left: 0;
+    display: flex;
+    justify-content: center ;
+    
+}
+
+
