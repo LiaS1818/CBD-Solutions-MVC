@@ -32,6 +32,17 @@ $router->get('/login', [LoginController::class ,'login']); //muestra el formular
 $router->post('/login', [LoginController::class , 'login']); // enviar datos al formulario
 $router->get('/logout', [LoginController::class, 'logout']); // cerrar sesion
 
+// Recuperar Password
+$router->get('/olvide', [LoginController::class, 'olvide']);
+$router->post('/olvide', [LoginController::class, 'olvide']);
+$router->get('/recuperar', [LoginController::class, 'recuperar']);
+$router->post('/recuperar', [LoginController::class, 'recuperar']);
+
+// Crear cuenta
+$router->post('/crear-cuenta', [LoginController::class, 'creaCuenta']);
+$router->get('/crear-cuenta', [LoginController::class, 'creaCuenta']);
+
+
 $router->comprobarRutas();
 
 ?>

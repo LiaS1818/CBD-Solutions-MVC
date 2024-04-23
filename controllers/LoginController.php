@@ -51,4 +51,8 @@ class LoginController {
         $_SESSION = [];
         header('Location: /');
     }
+
+    public static function creaCuenta(Router $router) {
+        $router->render('auth/crear-cuenta');
+    }
 }

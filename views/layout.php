@@ -50,7 +50,7 @@
                                 <a href="/contacto">Contacto</a>
                                 <a href="/nosotros">Nosotros</a>
                                 <a href="/login">Login</a>
-                                <a href="/registro">Registro</a>
+                                <a href="/crear-cuenta">Registro</a>
                                 <?php endif; ?>
                             </nav>
                 </div>
