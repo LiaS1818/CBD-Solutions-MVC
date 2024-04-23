@@ -267,7 +267,8 @@ CREATE TABLE `concentraciones` (
   `precio` decimal(5,2) DEFAULT NULL,
   `dispo` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- COLLATE=utf8mb4_0900_ai_ci
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
