@@ -12,17 +12,35 @@ class ActiveRecord{
     // Errores
     protected static $errores = [];  //solo la clase pueden modificar la variable
 
+    // Alertas y Mensajes
+    protected static $alertas = [];
+
+    public static function setAlerta($tipo, $mensaje) {
+        static::$alertas[$tipo][] = $mensaje;
+    }
+
+    // Validación
+    public static function getAlertas() {
+        return static::$alertas;
+    }
     //Definir la conexion a la base de datos
     public static function setDB($database){
         self::$db = $database;   
     }
     
+    // Busca un registro por su id
+    public static function where($columna, $valor) {
+        $query = "SELECT * FROM " . static::$tabla  ." WHERE ${columna} = '${valor}'";
+        $resultado = self::consultarSQL($query);
+        return array_shift( $resultado ) ;
+    }
+
     public function guardar() {
-        if (!is_null($this->id_producto)) {
+        if (!is_null($this->id)) {
             // actualizar
-            $this->actualizar();
+         return  $this->actualizar();
         }else{
-            $this->crear();
+            return $this->crear();
         }
     }
 
@@ -77,12 +95,12 @@ class ActiveRecord{
         //
         
         $resultado = self::$db->query($query);
-       
+        return $resultado;
         // Mensaje de exito
-        if ($resultado ) {
-            //Redireccionar al usuario
-            header('Location: /admin?resultado=1');
-        }
+        // if ($resultado ) {
+        //     //Redireccionar al usuario
+        //     header('Location: /admin?resultado=1');
+        // }
     }
 
     public function actualizar() {
@@ -97,7 +115,7 @@ class ActiveRecord{
 
         $query = "UPDATE " . static::$tabla . " SET ";
         $query .= join(', ', $valores);
-        $query .= " WHERE id_producto = '" . self::$db->escape_string($this->id_producto) . "' ";
+        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
         $query .= " LIMIT 1 ";
 
         $resultado = self::$db->query($query);
@@ -202,6 +220,9 @@ class ActiveRecord{
 
         return $resultado;
     }
+
+
+    // Busca en cualquioer comna, el valor necesariol
 
     // Busca un registro por su id
     public static function find($id){

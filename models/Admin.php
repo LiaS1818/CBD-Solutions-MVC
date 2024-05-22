@@ -6,26 +6,56 @@ class Admin extends ActiveRecord {
     // Base de datos
 
     protected static $tabla = 'clientes';
-    protected static $columnasDB = ['id','email', 'contrasena'];
+    protected static $columnasDB = ['id','nombre', 'apellido', 'email', 'contrasena', 'telefono', 'admin', 'confirmado', 'token'];
 
     public $id;
     public $nombre;
     public $apellido;
     public $email;
     public $telefono;
-    public $nacimiento;
     public $contrasena;
+    public $admin;
+    public $confirmado;
+    public $token;
+
 
     public function __construct($args = [])
     {
         $this->id = $args['id'] ?? null; //place holders
-        // $this->nombre = $args['nombre'] ?? '';
-        // $this->apellido = $args['apellido'] ?? '';
-        // $this->telefono = $args['telefono'] ?? '';
-        // $this->nacimiento = $args['nacimiento'] ?? '';
+        $this->nombre = $args['nombre'] ?? '';
+        $this->apellido = $args['apellido'] ?? '';
+        $this->telefono = $args['telefono'] ?? '';
         $this->contrasena = $args['contrasena'] ?? '';
         $this->email = $args['email'] ?? '';
+        $this->admin = $args['admin'] ?? '0';
+        $this->confirmado = $args['confirmado'] ?? '0';
+        $this->token = $args['token'] ?? '';    
     }
+
+    public function validarRegitro(){
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El Email es obligatorio';
+        }
+        if (!$this->contrasena) {
+            self::$alertas['error'][] = 'La contraseña es obligatoria';
+        }
+        if (!$this->nombre) {
+            self::$alertas['error'][] = 'El nombre es obligatorio';
+        }
+        if (!$this->telefono) {
+            self::$alertas['error'][] = 'El Telefono es obligatorio';
+        }
+        if (!$this->apellido) {
+            self::$alertas['error'][] = 'El apellido es obligatorio';
+        }
+
+        if (strlen($this->contrasena < 6)) {
+            self::$alertas['error'][] = 'El password tiene que tener por lo menos 6 caracteres';
+        }
+        return self::$alertas;
+    }
+
+    
 
     public function validar() {
         if (!$this->email) {
@@ -44,11 +74,19 @@ class Admin extends ActiveRecord {
         $resultado = self::$db->query($query);
         
         // Si no hay ninguna columna 
-        if (!$resultado->num_rows) {
-            self::$errores[] = 'El usuario no existe';
+        if ($resultado->num_rows) {
+            self::$alertas['error'][] = 'El usuario ya existe';
         }
 
         return $resultado;
+    }
+
+    public function hashPassword() {
+        $this->contrasena = password_hash($this->contrasena, PASSWORD_BCRYPT);
+    }
+
+    public function crearToken() {
+        $this->token = uniqid();
     }
 
     public function comprobarPassword($resultado) {

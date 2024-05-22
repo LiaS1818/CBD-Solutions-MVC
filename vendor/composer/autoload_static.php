@@ -46,6 +46,7 @@ class ComposerStaticInit941eaeb22886e06bc4ca16c94b84f37c
         'C' => 
         array (
             'Controllers\\' => 12,
+            'Classes\\' => 8,
         ),
     );
 
@@ -60,8 +61,8 @@ class ComposerStaticInit941eaeb22886e06bc4ca16c94b84f37c
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'PHPMailer\\PHPMailer\\' => 
         array (
@@ -98,6 +99,10 @@ class ComposerStaticInit941eaeb22886e06bc4ca16c94b84f37c
         'Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/controllers',
+        ),
+        'Classes\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/classes',
         ),
     );
 
